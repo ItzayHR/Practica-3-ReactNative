@@ -5,7 +5,7 @@ import {LibrosContext} from '../Context/LibrosContext';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const HomeScreen = () => {
-    const {catalogo,agregar,agregarCarrito} = useContext(LibrosContext);
+    const {catalogo, AgregarWishList, AgregarCarro} = useContext(LibrosContext);
     return (
         <ScrollView>
             <Header
@@ -13,7 +13,7 @@ const HomeScreen = () => {
                 backgroundColor: 'purple',
               }}
               placement="center"
-              centerComponent={{ text: 'HOME', style: styles.heading }}
+              centerComponent={{ text: 'HOME', style: styles.header }}
             />
         <View style={styles.container}>
             {catalogo.map((e,i)=>{
@@ -24,15 +24,15 @@ const HomeScreen = () => {
                         marginBottom: 10
                     }} 
                     key={i}>
-                        <Card.Title>{e.titulo}</Card.Title> 
+                        <Card.Title style={styles.titulo}>{e.titulo}</Card.Title> 
                         <Card.Divider/>
                         <View>
-                            <Text>Precio: ${e.precio} MXN</Text>
-                            <Text>Idioma: {e.idioma}</Text>
+                            <Text> Precio: ${e.precio} MXN</Text>
+                            <Text> Idioma: {e.idioma}</Text>
                             <View style={styles.containerIcons}>
                                 <Button
                                 onPress={
-                                    ()=> agregarCarrito(e)
+                                    ()=> AgregarCarro(e)
                                 }
                                 type="clear"
                                 icon={
@@ -45,7 +45,7 @@ const HomeScreen = () => {
                                 />
                                 <Button
                                 onPress={()=> (
-                                agregar(e)
+                                AgregarWishList(e)
                                 )}
                                 type="clear"
                                 icon={
@@ -77,14 +77,17 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'space-around',
     },
-    heading: {
+    header: {
         color: 'white',
-        fontSize: 35,
+        fontSize: 40,
         fontWeight: 'bold',
     },
     containerIcons:{
         flexDirection:'row',
         alignItems: 'center',
         justifyContent: 'flex-end'
-    }
+    },
+    titulo:{
+      fontSize: 25
+    },
 });

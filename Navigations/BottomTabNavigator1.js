@@ -3,7 +3,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {View} from 'react-native'
 import {Badge} from 'react-native-elements'
 import WishListScreen from '../Screens/WishListScreen';
-import AccountScreen from '../Screens/AccountScreen';
+import CartScreen from '../Screens/CartScreen';
 import HomeScreen from '../Screens/HomeScreen';
 import {LibrosContext} from '../Context/LibrosContext';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -11,14 +11,14 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 const Tab = createBottomTabNavigator();
 
 export default function BottomTabNavigator1(){
-    const {cantidadVerificar,cantidad}= useContext(LibrosContext);
+    const {cantidadVerificar,cantidad} = useContext(LibrosContext);
     return(
         <Tab.Navigator
-            screenOptions={{
+            screenOptions = {{
                 headerShown: false
             }}
             initialRouteName="Home"
-            tabBarOptions={{
+            tabBarOptions = {{
                 activeTintColor:"#ff6600",
                 inactiveTintColor:"#060606",
                 showLabel:true,
@@ -32,40 +32,41 @@ export default function BottomTabNavigator1(){
             }}
         > 
             <Tab.Screen
-                name="Home"
-                component={HomeScreen}
-                options={{
+                name = "Home"
+                component = {HomeScreen}
+                options = {{
                     tabBarLabel:"Inicio",
-                    tabBarIcon:({color})=>(
-                        <Ionicons name={"ios-home"} size={20} color={color}/>
+                    tabBarIcon:({color}) => (
+                        <Ionicons name = {"ios-home"} size = {20} color={color}/>
                     )
                 }}
             />
             <Tab.Screen
-                name="WishList"
-                component={WishListScreen}
-                options={{
+                name = "WishList"
+                component = {WishListScreen}
+                options = {{
                     tabBarLabel:"WishList",
                     tabBarIcon:({color})=>(
-                        <Ionicons name={"gift"} size={20} color={color}/>
+                        <Ionicons name = {"gift"} size = {20} color={color}/>
                     )
                 }}
             />
-            {cantidad>0 ?
+            {cantidad > 0 
+            ?
             <Tab.Screen
-            name="Cuenta"
-            component={AccountScreen}
+            name = "Carro"
+            component = {CartScreen}
             options={{
-                tabBarLabel:"Cuenta",
-                tabBarIcon:({color})=>(
+                tabBarLabel:"Carro",
+                tabBarIcon:({color}) => (
                     <View>
                     <Ionicons 
                         containerStyle={{backgroundColor:'black'}}
-                        name={"cart"} size={22} color={color}/>
+                        name = {"cart"} size = {22} color={color}/>
                     <Badge
                         value={cantidadVerificar()}
                         status="error"
-                        textStyle={{fontSize:8}}
+                        textStyle = {{fontSize:8}}
                         containerStyle={{ position: 'absolute', top:-5, right:-9 }}
                     />  
                     </View>
@@ -75,16 +76,16 @@ export default function BottomTabNavigator1(){
             />
             :
             <Tab.Screen
-            name="Cuenta"
-            component={AccountScreen}
-            options={{
-                tabBarLabel:"Cuenta",
+            name="Carro"
+            component = {CartScreen}
+            options = {{
+                tabBarLabel:"Carro",
                 tabBarIcon:({color})=>(
                     <Ionicons 
-                    containerStyle={{
+                    containerStyle = {{
                         position:'relative'
                     }}
-                    name={"cart"} size={22} color={color}>
+                    name = {"cart"} size = {22} color={color}>
                     </Ionicons>
                 )
                 }}

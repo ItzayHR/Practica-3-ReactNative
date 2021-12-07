@@ -5,9 +5,7 @@ import {LibrosContext} from '../Context/LibrosContext';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default function SettingsScreen() {
-   const {wishList, agregar,agregarCarrito} = useContext(LibrosContext);
-   let ScreenHeight = Dimensions.get("window").height;
-   ScreenHeight= (ScreenHeight * .78);
+   const {wishList, AgregarWishList,AgregarCarro} = useContext(LibrosContext);
 
    const styles = StyleSheet.create({
     container: {
@@ -17,7 +15,6 @@ export default function SettingsScreen() {
     },
     container2: {
       flex: 1,
-      height: ScreenHeight,
       alignItems:'center',
       justifyContent: 'space-around',
     },
@@ -26,7 +23,7 @@ export default function SettingsScreen() {
       alignItems:'center',
       justifyContent: 'space-around',
     },
-    heading: {
+    Header: {
         color: 'white',
         fontSize: 35,
         fontWeight: 'bold',
@@ -40,20 +37,26 @@ export default function SettingsScreen() {
       fontSize:22,
       fontWeight:'bold',
     },
-});
+    titulo:{
+      fontSize:25,
+    }
+  });
+
     return (
-        <View style={styles.container}>
+        <View style = {styles.container}>
           <ScrollView>
             <Header
-                containerStyle={{
+                containerStyle = {{
                 backgroundColor: 'purple',
               }}
-              placement="center"
-              centerComponent={{ text: 'WISH LIST', style:styles.heading }}
+              placement = "center"
+              centerComponent={{ text: 'WISHLIST', style:styles.Header }}
             />
-            <View style={styles.container3}>
-              { wishList.length>0  ?
-              wishList.map((e,i)=>{
+            <View style = {styles.container3}>
+              { 
+              wishList.length > 0  
+              ?
+              wishList.map((e,i) => {
                   return(
                       <Card  
                       containerStyle={{
@@ -61,33 +64,33 @@ export default function SettingsScreen() {
                           marginBottom: 10
                       }} 
                       key={i}>
-                          <Card.Title>{e.titulo}</Card.Title> 
+                          <Card.Title style = {styles.titulo}>{e.titulo}</Card.Title> 
                           <Card.Divider/>
                           <View>
-                              <Text>Precio: ${e.precio} pesos</Text>
-                              <Text>Idioma: {e.idioma}</Text>
-                              <View style={styles.containerIcons}>
+                              <Text> Precio: ${e.precio} MXN</Text>
+                              <Text> Idioma: {e.idioma}</Text>
+                              <View style = {styles.containerIcons}>
                                   <Button
-                                  onPress={
-                                      ()=> agregarCarrito(e)
+                                  onPress = {
+                                      ()=> AgregarCarro(e)
                                   }
-                                  type="clear"
-                                  icon={
+                                  type = "clear"
+                                  icon = {
                                     <Icon
-                                      name="shopping-cart"
-                                      size={25}
-                                      color="purple"
+                                      name = "shopping-cart"
+                                      size = {25}
+                                      color = "purple"
                                     />
                                   }
                                   />
                                   <Button
-                                  onPress={()=> (agregar(e))}
-                                  type="clear"
-                                  icon={
+                                  onPress = {() => (AgregarWishList(e))}
+                                  type = "clear"
+                                  icon = {
                                     <Icon
-                                      name="trash"
-                                      size={25}
-                                      color="red"
+                                      name = "trash"
+                                      size = {25}
+                                      color = "red"
                                     />
                                   }
                                   />
@@ -97,8 +100,8 @@ export default function SettingsScreen() {
                   );
               })
               :
-              <View style={styles.container2}>
-                <Text style={styles.texto}>No se ha agregado nada a la lista de deseados :c</Text>
+              <View style = {styles.container2}>
+                <Text style = {styles.texto}>No se ha agregado nada a la lista de deseados :c</Text>
               </View>
               }
             </View>
